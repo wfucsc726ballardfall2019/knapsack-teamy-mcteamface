@@ -206,12 +206,8 @@ void backtrack_implicit(vector<int>&K, vector<int>&M, const vector<int>& wts, co
     } else {
         path[mid] = k;
     }
-    #pragma omp parallel 
-    {
     backtrack_implicit(K,M,wts,vals,k,first,mid,path);
     backtrack_implicit(K,M,wts,vals,W-k,mid+1,last,path);
-    }
-     
 }
 
 int findk(vector<int>&K, vector<int>&M, const vector<int>& wts, const vector<int>& vals, int W, 
