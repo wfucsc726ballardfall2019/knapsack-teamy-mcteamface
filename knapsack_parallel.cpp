@@ -174,6 +174,7 @@ int compute_table(vector<int>& K, const vector<int>& wts, const vector<int>& val
         // switch curr and prev columns each iteration to avoid copy
         curr = j%2;
         prev = (j+1)%2;
+        #pragma omp parallel for
         for(w = 0; w <= W; w++) {
             // if item doesn't fit or not including it is better
             if(w < wts[j] || K[li(w,prev,W)] >= vals[j] + K[li(w-wts[j],prev,W)]) {
@@ -205,8 +206,11 @@ void backtrack_implicit(vector<int>&K, vector<int>&M, const vector<int>& wts, co
     } else {
         path[mid] = k;
     }
+    #pragma omp parallel 
+    {
     backtrack_implicit(K,M,wts,vals,k,first,mid,path);
     backtrack_implicit(K,M,wts,vals,W-k,mid+1,last,path);
+    }
      
 }
 
@@ -231,7 +235,7 @@ int findk(vector<int>&K, vector<int>&M, const vector<int>& wts, const vector<int
         // switch curr and prev columns each iteration to avoid copy
         curr = j%2;
         prev = (j+1)%2;
-
+        #pragma omp parallel for
         for(w = 0; w <= W; w++) {
         
             // if item doesn't fit or not including it is better
