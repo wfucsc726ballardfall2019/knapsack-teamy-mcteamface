@@ -125,8 +125,9 @@ void build_table(vector<int>& K, const vector<int>& wts, const vector<int>& vals
     }
 
     // loop over 2D table
-    for(w = 0; w <= W; w++) {
-        for(j = 1; j < numItems; j++) {
+    for(j = 1; j < numItems; j++) {
+        #pragma omp parallel for
+        for(w = 0; w <= W; w++) {
             // if item doesn't fit or not including it is better
             if(w < wts[j] || K[li(w,j-1,W)] >= vals[j] + K[li(w-wts[j],j-1,W)]) {
                 K[li(w,j,W)] = K[li(w,j-1,W)];
