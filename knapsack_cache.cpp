@@ -5,6 +5,18 @@
 #include <stdlib.h>
 using namespace std;
 
+
+//CSC 726 Fall 2019
+//Lab 1
+// Dylan King and Gabe Marcus
+
+
+
+//the only change made in this file is on line number 144-145
+
+
+
+
 // macro for linear indexing into 2D table (column-major)
 inline int li(int w, int j, int W) {return w+j*(W+1);}
 
@@ -128,7 +140,7 @@ void build_table(vector<int>& K, const vector<int>& wts, const vector<int>& vals
 //Here, we exchange the order in which we loop over the table
 
 
-    
+    //here we have exchanged the order of the two for loops, so as to loop over an entire column at a time
     for(j = 1; j < numItems; j++) {
         for(w = 0; w <= W; w++) {
             // if item doesn't fit or not including it is better
