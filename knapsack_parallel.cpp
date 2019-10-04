@@ -11,7 +11,7 @@ using namespace std;
 
 
 
-//the only changse made in this file are on line numbers 140,190,248
+//the only changes made in this file are on line numbers 140,190,248
 
 
 // macro for linear indexing into 2D table (column-major)
