@@ -5,6 +5,15 @@
 #include <stdlib.h>
 using namespace std;
 
+//CSC 726 Fall 2019
+//Lab 1
+// Dylan King and Gabe Marcus
+
+
+
+//the only changse made in this file are on line numbers 140,190,248
+
+
 // macro for linear indexing into 2D table (column-major)
 inline int li(int w, int j, int W) {return w+j*(W+1);}
 
@@ -126,6 +135,8 @@ void build_table(vector<int>& K, const vector<int>& wts, const vector<int>& vals
 
     // loop over 2D table
     for(j = 1; j < numItems; j++) {
+      
+      //we paralellize this inner for loop since each step is independent
         #pragma omp parallel for
         for(w = 0; w <= W; w++) {
             // if item doesn't fit or not including it is better
@@ -174,6 +185,8 @@ int compute_table(vector<int>& K, const vector<int>& wts, const vector<int>& val
         // switch curr and prev columns each iteration to avoid copy
         curr = j%2;
         prev = (j+1)%2;
+      
+      //once again, updating (this time our two column system) may be parallelized
         #pragma omp parallel for
         for(w = 0; w <= W; w++) {
             // if item doesn't fit or not including it is better
@@ -231,6 +244,7 @@ int findk(vector<int>&K, vector<int>&M, const vector<int>& wts, const vector<int
         // switch curr and prev columns each iteration to avoid copy
         curr = j%2;
         prev = (j+1)%2;
+      //and finally, our loop in find k can also be parallelized
         #pragma omp parallel for
         for(w = 0; w <= W; w++) {
         
